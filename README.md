@@ -1,44 +1,36 @@
 # Terraform AWS 3-Tier Architecture
 
-This project sets up a 3-tier architecture on AWS using Terraform, including the necessary resources such as VPC, subnets, security groups, EC2 instances, load balancers, and RDS for MySQL. The architecture is designed to be modular and reusable for different environments.
+This repository contains the Terraform code for provisioning a 3-tier architecture on AWS. The architecture consists of a:
+
+- **Web Tier (EC2 instances)**: Hosted in public subnets, running a PHP application.
+- **Application Tier (EC2 instances)**: Hosted in private subnets, running an application backend.
+- **Database Tier (RDS)**: Hosted in private subnets, running MySQL.
+
+This project uses Terraform to automate the provisioning of resources such as VPC, subnets, EC2 instances, RDS instances, load balancers, security groups, and more, in a scalable and modular fashion.
 
 ## Architecture Overview
 
-The architecture includes the following components:
+The infrastructure is designed with the following components:
 
-- **VPC**: A virtual private cloud (VPC) with public and private subnets.
-- **Security Groups**: Security groups for the jump server, PHP application server, RDS instance, and load balancer.
-- **EC2 Instances**: A jump server, a PHP application server, and an auto-scaling group for application servers.
-- **ALB (Application Load Balancer)**: An ALB to handle HTTP requests and route them to the appropriate EC2 instances.
-- **RDS Instance**: An RDS MySQL instance for storing application data.
+1. **VPC**: A custom Virtual Private Cloud (VPC) with public and private subnets across multiple availability zones.
+2. **Security Groups**: Separate security groups for the Jump Server, PHP App Servers, ALB, and RDS.
+3. **EC2 Instances**: Web and Application servers configured within the VPC.
+4. **RDS Instance**: MySQL database hosted in private subnets.
+5. **ALB**: An Application Load Balancer to distribute traffic to web servers.
 
-## Project Setup
+## Requirements
 
-### Prerequisites
+Before you begin, ensure that you have the following tools installed:
 
-Before you start, you need to have the following installed:
+- [Terraform](https://www.terraform.io/downloads.html) (v1.0+)
+- [AWS CLI](https://aws.amazon.com/cli/) (configured with appropriate credentials)
 
-- [Terraform](https://www.terraform.io/downloads.html) (v1.0 or higher)
-- [AWS CLI](https://aws.amazon.com/cli/) (configured with your AWS credentials)
-- [Git](https://git-scm.com/)
+## Getting Started
 
-### Clone the Repository
+Follow the steps below to deploy the infrastructure using Terraform.
 
-Clone this repository to your local machine using the following command:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/SasthaCJP/terraform-aws-3-tier.git
 cd terraform-aws-3-tier
-Configure Terraform Variables
-Before running Terraform, configure the variables in the terraform.tfvars file to match your AWS environment.
-region = "us-east-2"
-vpc_id = "vpc-xxxxxxxx"
-public_subnet_ids = ["subnet-xxxxxxxx", "subnet-yyyyyyyy"]
-private_db_subnet_ids = ["subnet-zzzzzzzz"]
-db_username = "admin"
-db_password = "your-password"
-tags = {
-  "Owner" = "YourName"
-  "Project" = "3-Tier Architecture"
-}
-
