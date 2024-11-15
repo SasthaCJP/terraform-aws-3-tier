@@ -29,3 +29,16 @@ Clone this repository to your local machine using the following command:
 ```bash
 git clone https://github.com/SasthaCJP/terraform-aws-3-tier.git
 cd terraform-aws-3-tier
+Configure Terraform Variables
+Before running Terraform, configure the variables in the terraform.tfvars file to match your AWS environment.
+region = "us-east-2"
+vpc_id = "vpc-xxxxxxxx"
+public_subnet_ids = ["subnet-xxxxxxxx", "subnet-yyyyyyyy"]
+private_db_subnet_ids = ["subnet-zzzzzzzz"]
+db_username = "admin"
+db_password = "your-password"
+tags = {
+  "Owner" = "YourName"
+  "Project" = "3-Tier Architecture"
+}
+
