@@ -1,0 +1,15 @@
+# provider.tf
+provider "aws" {
+  region = var.region # Reference the region variable for flexibility
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+
+  required_version = ">= 1.0.0"
+}
